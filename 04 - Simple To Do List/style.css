@@ -1,0 +1,139 @@
+body{
+    height: 100vh;
+    background-image: linear-gradient(-90deg, #333333, #dd1818 40%);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+p, h1{
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+main{
+    padding: 20px;
+    /* background-color: aqua; */
+    max-width: 600px;
+    margin: auto;
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.principal h1{
+    margin-bottom: 30px;
+    color: white;
+}
+
+.tarefas-container{
+    box-shadow: 2px 3px 1px black;
+    display: flex;
+    background-color: white;
+}
+
+.tarefas-container input{
+    padding: 8px;
+    width: 290px;
+    border: none;
+    font-size: 18px;
+}
+
+input:focus{
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+
+.icon-container{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-left: 1px solid lightgray;
+}
+
+.icon-container span:hover{
+    color: red;
+}
+
+
+.resultados-container{
+    margin-top: 60px;
+}
+
+.resultados-container h1{
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.resultado{
+    display: flex;
+    background-color: white;
+    align-items: center;
+    padding-left: 8px;
+    margin-bottom: 20px;
+    box-shadow: 2px 3px 1px black;
+}
+
+.resultado p{
+    margin: 0;
+}
+
+.resultado-text-area{
+    width: 280px;
+}
+
+.resultado span{
+    cursor: pointer;
+    border-left: 1px solid lightgray;
+    font-size: 32px;
+    padding: 10px;
+}
+
+.resultado span:nth-child(1){
+    color: green;
+    margin-right: -5px;
+}
+
+.resultado span:nth-child(1):hover{
+    background-color: green;
+    color: black;
+}
+
+.resultado span:nth-child(2){
+    color: red;
+}
+
+.resultado span:nth-child(2):hover{
+    background-color: red;
+    color: black;
+}
+
+.finalized{
+    background-color: purple;
+    text-decoration: line-through;
+    color: white;
+}
+
+.hide{
+    display: none;
+}
+
+.btn-limpar{
+    padding: 5px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+.btn-limpar:hover{
+    box-shadow: 0px 0px 5px lightgray;
+}
