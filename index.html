@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios em Html e Css</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(0, 0, 0);
+            background-image: linear-gradient(-45deg, #C9D6FF, #E2E2E2);
+            height: 96vh;
+        }
+        main{
+            text-align: center;
+            max-width: 600px;
+            margin: auto;
+        }
+        h1{
+            color: rgba(0, 0, 0, 0.568);
+            margin-left: 14px;
+            background-color: rgba(240, 248, 255, 0.39);
+            border-radius: 20px;
+        }
+        p{
+            font-size: 14px;
+        }
+
+        a{
+            text-decoration: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .flex-container{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 10px;
+        }
+
+        .flex-container .itens{
+            cursor: pointer;
+            height: 60px;
+            width: 100%;
+            border-radius: 0px 10px 10px 0px;
+            box-shadow: 0px 0px 8px #0000005e;
+            background-color: aliceblue;
+            color: rgba(0, 0, 0, 0.568);
+            gap: 20px 0px;
+            font-size: 1.25em;
+            border-left: 8px solid #C9D6FF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .itens:hover{
+            transform: translate(0px, -4px);
+            transition: transform 0.3s;
+            border-left: 8px solid aquamarine;
+        }
+
+        img{
+            display: block;
+            width: 100%;
+            border-radius: 10px 10px 0px 0px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Escolha um Exercício De Js💛 para visualizar</h1>
+        
+        <div class="flex-container">
+            <a target="_blank" href="01 - Modal em Js/index.html">
+                <div class="itens">
+                    <h3>01 - Modal em Js</h3>
+                </div>
+            </a>
+            <a target="_blank" href="02 - LocalStorage/index.html">
+                <div class="itens">
+                    <h3>02 - LocalStorage</h3>
+                </div>
+            </a>
+            <a target="_blank" href="03 - Semaforo/index.html">
+                <div class="itens">
+                    <h3>03 - Semaforo</h3>
+                </div>
+            </a>
+            <a target="_blank" href="04 - Simple To Do List/index.html">
+                <div class="itens">
+                    <h3>04 - Simple To Do List</h3>
+                </div>
+            </a>
+            <a target="_blank" href="05 - DarkMode/index.html">
+                <div class="itens">
+                    <h3>05 - DarkMode com LocalStorage</h3>
+                </div>
+            </a>
+            <a target="_blank" href="06 - SlideShow/index.html">
+                <div class="itens">
+                    <h3>06 - SlideShow</h3>
+                </div>
+            </a>
+        </div>
+        <code>
+            <p>
+                Vale ressaltar que esses exercícios foram realizados de acordo com meu progresso de estudos, sendo assim
+                o primerio é mais basico :/
+            </p>
+        </code>
+    </main>
+</body>
+</html>
