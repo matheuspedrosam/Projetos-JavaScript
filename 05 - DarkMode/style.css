@@ -37,6 +37,7 @@ main{
     display: flex;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.541);
     height: 400px;
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
