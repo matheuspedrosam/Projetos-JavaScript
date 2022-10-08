@@ -107,3 +107,31 @@ body{
 .selected{
     background-color: black;
 }
+
+@media (max-width: 1100px) {
+    .container-slide{
+        width: 90vw;
+    }
+
+    .container-itens .itens{
+        width: 90vw;
+    }
+}
+
+@media (max-width: 500px){
+    .container-slide{
+        height: 25vh;
+    }
+
+    .container-itens{
+        height: 25vh;
+    }
+
+    .container-itens .itens{
+        height: 25vh;
+    }
+
+    .bolinhas-container{
+        top: 45%;
+    }
+}
