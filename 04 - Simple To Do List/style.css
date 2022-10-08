@@ -137,3 +137,32 @@ input:focus{
 .btn-limpar:hover{
     box-shadow: 0px 0px 5px lightgray;
 }
+
+@media (max-width: 310px){
+    .resultado-text-area{
+        width: 130px !important; 
+    }
+}
+
+@media (max-width: 338px){
+    .tarefas-container input{
+        width: 200px;
+    }
+}
+
+@media (max-width: 451px) {
+    main{
+        padding: 10px;
+    }
+    
+    .resultado span:nth-child(1){
+        font-size: 20px;
+    }
+    .resultado span:nth-child(2){
+        font-size: 20px;
+    }
+
+    .resultado-text-area{
+        width: 180px;
+    }
+}
