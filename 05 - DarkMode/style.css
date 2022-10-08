@@ -22,13 +22,14 @@ header{
     /* max-width: 1800px;
     margin: auto; */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.541);
+    margin-bottom: 15px;
 }
 
 main{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 92.9%;
+    height: 100%;
 }
 
 .card{
@@ -36,12 +37,15 @@ main{
     display: flex;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.541);
     height: 400px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .card-image{
     flex: 1;
     padding: 20px 0px 20px 20px;
     position: relative;
+    background-color: #eceff1;
 }
 
 .card-image span{
@@ -52,7 +56,7 @@ main{
 .card-image img{
     position: absolute;
     transform: rotate(-30deg);
-    width: 500px;
+    max-width: 500px;
     left: -110px;
     bottom: 50px;
 }
@@ -60,7 +64,7 @@ main{
 .card-details{
     flex: 1.2;
     padding: 20px 20px 20px 30px;
-    width: 600px;
+    max-width: 600px;
     background-color: white;
 }
 
@@ -86,6 +90,7 @@ main{
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
+    flex-wrap: wrap;
 }
 
 .price{
@@ -131,9 +136,14 @@ main{
     display: none;
 }
 
+.dark main{
+    background-color: #151515;
+}
+
 .dark header{
     box-shadow: 2px 2px 8px rgba(255, 255, 255, 0.541);
 }
+
 
 .dark .card{
     box-shadow: 2px 2px 8px rgba(255, 255, 255, 0.541);
@@ -149,4 +159,74 @@ main{
 
 .dark .price{
     color: black;
+}
+
+.dark .card-image{
+    background-color: #151515;
+}
+
+@media (max-width: 319px){
+    header{
+        padding: 20px;
+    }
+    .card-details h2{
+        font-size: 40px;
+    }
+    .card-details .subtitle{
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 328px){
+    .card-image img{ 
+        width: 230px !important; 
+    }
+}
+
+@media (max-width: 390px){
+    .card-image img{
+        transform: rotate(0deg);
+        position: unset;
+        display: block;
+    }
+    .price-container{
+        justify-content: center;
+    }
+    .btn-comprar{
+        margin-top: 20px;
+        height: 40px;
+    }
+    
+    
+    .dark .card-image{
+        background-color: #151515;
+    }
+}
+
+@media (max-width: 700px){
+    .card{
+        height: 700px;
+        flex-direction: column;
+    }
+    .card-details{
+        order: -1;
+    }
+
+    .card-image img{
+        position: relative;
+        top: 20px;
+    }
+
+}
+
+@media (max-width: 968px){
+    .card-image{
+        text-align: center;
+        padding-left: 0;
+    }
+    .card-image img{
+        width: 300px;
+        left: 20px;
+        bottom: 120px;
+    }
 }
