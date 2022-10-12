@@ -124,6 +124,7 @@ button:hover{
     padding: 20px;
     display: flex;
     border-bottom: 1px solid lightgray;
+    
 }
 
 .find-container{
@@ -229,4 +230,26 @@ button:hover{
 
 .hide2{
     display: none;
+}
+
+
+@media (max-width: 480px) {
+    .find-and-filter-container{
+        flex-direction: column;
+        padding: 0px;
+    }
+
+    .find-container{
+        border-bottom: 1px solid lightgray;
+        padding: 20px;
+    }
+
+    .filter-container{
+        padding: 20px;
+        border: none;
+    }
+
+    .filter-container select{
+        width: 40%;
+    }
 }
