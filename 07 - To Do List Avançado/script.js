@@ -67,7 +67,6 @@ function adicionarTarefa(valor, classe, ide){
             total_tasks += 1
             salvarTarefaLocalStorage(task_input_value)
             id += 1
-            console.log(arr_tarefas)
         }
     }
 }
@@ -291,7 +290,6 @@ function excluirTask(obj){
 qs('#btn-clean-all').addEventListener('click', ()=>{
     let tasks = results_container.children
     let ciclo = tasks.length
-    console.log(ciclo)
     while (ciclo > 0){
         tasks[ciclo - 1].remove(true)
         ciclo--
