@@ -232,6 +232,21 @@ button:hover{
     display: none;
 }
 
+.btn-clean-all-container{
+    margin-top: 21px;
+    text-align: center;
+}
+
+#btn-clean-all{
+    padding: 5px;
+    color: var(--cor-azul);
+    border: 2px solid var(--cor-azul);
+}
+
+#btn-clean-all:hover{
+    color: white;
+}
+
 
 @media (max-width: 480px) {
     .find-and-filter-container{

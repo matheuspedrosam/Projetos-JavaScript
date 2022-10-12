@@ -1,29 +1,34 @@
-const add_task_btn = document.querySelector('#add-task-btn')
-const results_container = document.querySelector('.results-container')
-const select = document.querySelector('#filter-select')
-const edit_task_container =  document.querySelector('.edit-task-container')
-const add_task_container =  document.querySelector('.add-task-container')
-const find_and_filter_container =  document.querySelector('.find-and-filter-container')
 const qs = (el) => {
     return document.querySelector(el)
 }
+
+const add_task_btn = qs('#add-task-btn')
+const results_container = qs('.results-container')
+const select = qs('#filter-select')
+const edit_task_container =  qs('.edit-task-container')
+const add_task_container =  qs('.add-task-container')
+const find_and_filter_container =  qs('.find-and-filter-container')
+const btn_clean_all_container = qs('.btn-clean-all-container')
+var total_tasks = 0
 
 
 // ADICIONAR TAREFA ->
 
 function adicionarTarefa(){
-    var task_input_value = document.querySelector('#task-input').value
+    var task_input_value = qs('#task-input').value
     if (task_input_value){
-        var task_result = document.querySelectorAll('.task')[0].cloneNode(true)    
+        var task_result = qs('.task').cloneNode(true)
         task_result.classList.remove('hide2')
         task_result.classList.remove('finalized')
         var paragraph = task_result.children[0]
         paragraph.innerHTML = `${task_input_value}`
         results_container.appendChild(task_result)
-        document.querySelector('#task-input').value = ''
-        let select = qs('#filter-select')
+        qs('#task-input').value = ''
+        qs('#find-input').value = ''
         select[0].selected = true
         filtrarTodas()
+        btn_clean_all_container.classList.remove('hide')
+        total_tasks += 1
     }
 }
 
@@ -40,6 +45,7 @@ function findTask(){
     valor_do_input = qs('#find-input').value
     if (valor_do_input){
         filtrarTodas()
+        qs('#task-input').value = ''
         select[0].selected = true
         arr = [...results_container.children]
         resultado = []
@@ -56,6 +62,7 @@ function findTask(){
                 el.classList.remove('hide')
             }
         }
+        btn_clean_all_container.classList.add('hide')
     }
 }
 
@@ -81,6 +88,9 @@ function LimparBusca(){
         el.classList.remove('hide')
     }
     select[0].selected = true
+    if (total_tasks != 0){
+        btn_clean_all_container.classList.remove('hide')
+    }
 }
 
 
@@ -89,7 +99,7 @@ function LimparBusca(){
 function realizarFiltragem(){
     qs('#task-input').value = ''
     qs('#find-input').value = ''
-    
+
     let opcoes = select[select.selectedIndex].text
     switch (opcoes){
     case 'Todas':
@@ -109,6 +119,11 @@ function filtrarTodas(){
     for (el of tasks){
         el.classList.remove('hide')
     }
+    if (total_tasks != 0){
+        btn_clean_all_container.classList.remove('hide')
+    } else{
+        btn_clean_all_container.classList.add('hide')
+    }
 }
 
 function filtrar(situacao){
@@ -120,12 +135,14 @@ function filtrar(situacao){
                 task.classList.add('hide')
             }
         }
+        btn_clean_all_container.classList.add('hide')
     } else {
         for(task of tasks){
             if (task.classList.contains('finalized')){
                 task.classList.add('hide')
             }
         }
+        btn_clean_all_container.classList.add('hide')
     }
 }
 
@@ -144,6 +161,7 @@ function editarTask(obj){
     add_task_container.classList.add('hide')
     find_and_filter_container.classList.add('hide')
     edit_task_container.classList.remove('hide')
+    btn_clean_all_container.classList.add('hide')
 
     let tasks = results_container.children
     for (task of tasks){
@@ -180,10 +198,14 @@ function finishEdit(){
         task.classList.remove('hide')
     }
 
+    if (total_tasks != 0){
+        btn_clean_all_container.classList.remove('hide')
+    }
     edit_task_container.classList.add('hide')
     add_task_container.classList.remove('hide')
     find_and_filter_container.classList.remove('hide')
     select[0].selected = true
+    qs('#edit-task-input').value = ''
 }
 
 
@@ -191,4 +213,22 @@ function finishEdit(){
 
 function excluirTask(obj){
     obj.parentNode.parentNode.remove(true)
+    total_tasks -= 1
+    if (total_tasks === 0){
+        btn_clean_all_container.classList.add('hide')
+    }
 }
+
+qs('#btn-clean-all').addEventListener('click', ()=>{
+    let tasks = results_container.children
+    let ciclo = tasks.length
+    console.log(ciclo)
+    while (ciclo > 0){
+        tasks[ciclo - 1].remove(true)
+        ciclo--
+    }
+    btn_clean_all_container.classList.add('hide')
+    total_tasks = 0
+    qs('#find-input').value = ''
+    qs('#task-input').value = ''
+})
