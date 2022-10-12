@@ -4,13 +4,12 @@ const results_filter_container = document.querySelector('.result-filter-containe
 const qs = (el) => {
     return document.querySelector(el)
 }
-let soma = 0
 
 function adicionarTarefa(){
     var task_input_value = document.querySelector('#task-input').value
     if (task_input_value){
         var task_result = document.querySelectorAll('.task')[0].cloneNode(true)    
-        task_result.classList.remove('hide')
+        task_result.classList.remove('hide2')
         task_result.classList.remove('finalized')
         var paragraph = task_result.children[0]
         paragraph.innerHTML = `${task_input_value}`
@@ -19,10 +18,6 @@ function adicionarTarefa(){
         let select = qs('#filter-select')
         select[0].selected = true
         filtrarTodas()
-        if (soma == 0){
-            results_container.children[0].remove(true)
-            soma += 1
-        }
     }
 }
 

@@ -63,6 +63,7 @@ button:hover{
 
 .add-task-container input{
     padding: 5px;
+    border: 2px solid var(--cor-azul);
 }
 
 .add-task-container button{
@@ -95,6 +96,7 @@ button:hover{
 .edit-task-container input{
     padding: 5px;
     margin-right: 4px;
+    border: 2px solid var(--cor-azul);
 }
 
 .edit-task-container button{
@@ -138,6 +140,7 @@ button:hover{
 
 .find-container input{
     padding: 5px;
+    border: 2px solid var(--cor-azul);
 }
 
 
@@ -171,6 +174,7 @@ button:hover{
 }
 
 .filter-container select{
+    cursor: pointer;
     margin-top: 7px;
     padding: 5px;
     width: 100%;
@@ -220,5 +224,9 @@ button:hover{
 }
 
 .hide{
+    display: none;
+}
+
+.hide2{
     display: none;
 }
