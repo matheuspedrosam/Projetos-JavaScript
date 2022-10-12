@@ -4,10 +4,12 @@ const select = document.querySelector('#filter-select')
 const edit_task_container =  document.querySelector('.edit-task-container')
 const add_task_container =  document.querySelector('.add-task-container')
 const find_and_filter_container =  document.querySelector('.find-and-filter-container')
-const results_edit_container =  document.querySelector('.result-edit-container')
 const qs = (el) => {
     return document.querySelector(el)
 }
+
+
+// ADICIONAR TAREFA ->
 
 function adicionarTarefa(){
     var task_input_value = document.querySelector('#task-input').value
@@ -25,13 +27,14 @@ function adicionarTarefa(){
     }
 }
 
-add_task_btn.addEventListener('click', adicionarTarefa)
-
 function enviarTarefa(e){
     if (e.keyCode === 13){
         adicionarTarefa()
     }
 }
+
+
+// ENCONTRAR TAREFA ->
 
 function findTask(){
     valor_do_input = qs('#find-input').value
@@ -63,16 +66,16 @@ function enviarFind(e){
         qs('#find-input').value = ''
     }
     if(e.keyCode == 8){
-        cleanFindTask2()
+        LimparBusca()
     }
 }
 
 function cleanFindTask(){
-    cleanFindTask2()
+    LimparBusca()
     qs('#find-input').value = ''
 }
 
-function cleanFindTask2(){
+function LimparBusca(){
     arr = [...results_container.children]
     for (el of arr){
         el.classList.remove('hide')
@@ -81,7 +84,12 @@ function cleanFindTask2(){
 }
 
 
+// FILTRAR TAREFA ->
+
 function realizarFiltragem(){
+    qs('#task-input').value = ''
+    qs('#find-input').value = ''
+    
     let opcoes = select[select.selectedIndex].text
     switch (opcoes){
     case 'Todas':
@@ -107,37 +115,56 @@ function filtrar(situacao){
     filtrarTodas()
     let tasks = [...results_container.children]
     if (situacao == 'Feitas'){
-        for(el of tasks){
-            if (el.classList.contains('finalized') === false){
-                el.classList.add('hide')
+        for(task of tasks){
+            if (!task.classList.contains('finalized')){
+                task.classList.add('hide')
             }
         }
     } else {
-        for(el of tasks){
-            if (el.classList.contains('finalized') === true){
-                el.classList.add('hide')
+        for(task of tasks){
+            if (task.classList.contains('finalized')){
+                task.classList.add('hide')
             }
         }
     }
 }
 
+
+// TASK BTNS AÇÕES ->->->
+// FINALIZAR TAREFA ->
+
 function finalizarTask(obj){
     obj.parentNode.parentNode.classList.toggle('finalized')
+}
+
+
+// EDITAR TAREFA ->
+
+function editarTask(obj){
+    add_task_container.classList.add('hide')
+    find_and_filter_container.classList.add('hide')
+    edit_task_container.classList.remove('hide')
+
+    let tasks = results_container.children
+    for (task of tasks){
+        task.classList.add('hide')
+    }
+
+    let task_a_ser_editada = obj.parentNode.parentNode
+    task_a_ser_editada.classList.remove('hide')
 }
 
 function realizarEdicao(){
     novo_valor = qs('#edit-task-input').value
     if (novo_valor){
         let tasks = results_container.children
-        let task;
-        for (el of tasks){
-            if (!el.classList.contains('hide')){
-                task = el
+        for (task of tasks){
+            if (!task.classList.contains('hide')){
+                task.children[0].innerHTML = novo_valor
             }
         }
-        task.children[0].innerHTML = novo_valor
         qs('#edit-task-input').value = ''
-        cancelarEdit()
+        finishEdit()
     }
 }
 
@@ -147,26 +174,10 @@ function EnviarEdicao(e){
     }
 }
 
-function editarTask(obj){
-    add_task_container.classList.add('hide')
-    find_and_filter_container.classList.add('hide')
-    edit_task_container.classList.remove('hide')
-
+function finishEdit(){
     let tasks = results_container.children
-    arr = [...tasks]
-    for (el of tasks){
-        el.classList.add('hide')
-    }
-
-    let task_a_ser_editada = obj.parentNode.parentNode
-    task_a_ser_editada.classList.remove('hide')
-}
-
-function cancelarEdit(){
-    let tasks = results_container.children
-    arr = [...tasks]
-    for (el of tasks){
-        el.classList.remove('hide')
+    for (task of tasks){
+        task.classList.remove('hide')
     }
 
     edit_task_container.classList.add('hide')
@@ -174,6 +185,9 @@ function cancelarEdit(){
     find_and_filter_container.classList.remove('hide')
     select[0].selected = true
 }
+
+
+// EXCLUIR TAREFA
 
 function excluirTask(obj){
     obj.parentNode.parentNode.remove(true)
