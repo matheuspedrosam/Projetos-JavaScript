@@ -10,25 +10,65 @@ const add_task_container =  qs('.add-task-container')
 const find_and_filter_container =  qs('.find-and-filter-container')
 const btn_clean_all_container = qs('.btn-clean-all-container')
 var total_tasks = 0
+var arr_tarefas = []
+var id;
+verificarLocalStorage()
+
+function verificarLocalStorage(){
+    let tarefas = localStorage.getItem('tarefas')
+    let tarefas_json;
+    if (tarefas){
+        tarefas_json = JSON.parse(tarefas)
+        if (tarefas_json.length > 0 ){
+            for (el of tarefas_json){
+                adicionarTarefa(el.tarefa, el.finalized, el.id)
+            }
+            id = tarefas_json[tarefas_json.length - 1].id + 1
+            arr_tarefas = tarefas_json
+        }
+    } else {
+        id = 0
+    }
+}
 
 
 // ADICIONAR TAREFA ->
 
-function adicionarTarefa(){
-    var task_input_value = qs('#task-input').value
-    if (task_input_value){
+function adicionarTarefa(valor, classe, ide){
+    if (valor){
         var task_result = qs('.task').cloneNode(true)
         task_result.classList.remove('hide2')
-        task_result.classList.remove('finalized')
+        if (classe === false){
+            task_result.classList.remove('finalized')
+        } else{
+            task_result.classList.add('finalized')
+        }
         var paragraph = task_result.children[0]
-        paragraph.innerHTML = `${task_input_value}`
+        paragraph.innerHTML = `${valor}`
+        task_result.setAttribute('id', ide)
         results_container.appendChild(task_result)
-        qs('#task-input').value = ''
-        qs('#find-input').value = ''
-        select[0].selected = true
-        filtrarTodas()
         btn_clean_all_container.classList.remove('hide')
         total_tasks += 1
+    } else {
+        var task_input_value = qs('#task-input').value
+        if (task_input_value){
+            var task_result = qs('.task').cloneNode(true)
+            task_result.classList.remove('hide2')
+            task_result.classList.remove('finalized')
+            var paragraph = task_result.children[0]
+            paragraph.innerHTML = `${task_input_value}`
+            task_result.setAttribute('id', id)
+            results_container.appendChild(task_result)
+            qs('#task-input').value = ''
+            qs('#find-input').value = ''
+            select[0].selected = true
+            filtrarTodas()
+            btn_clean_all_container.classList.remove('hide')
+            total_tasks += 1
+            salvarTarefaLocalStorage(task_input_value)
+            id += 1
+            console.log(arr_tarefas)
+        }
     }
 }
 
@@ -36,6 +76,11 @@ function enviarTarefa(e){
     if (e.keyCode === 13){
         adicionarTarefa()
     }
+}
+
+function salvarTarefaLocalStorage(valor){
+    arr_tarefas.push({id: id, tarefa: valor, finalized: false})
+    localStorage.setItem('tarefas', JSON.stringify(arr_tarefas))
 }
 
 
@@ -151,7 +196,20 @@ function filtrar(situacao){
 // FINALIZAR TAREFA ->
 
 function finalizarTask(obj){
-    obj.parentNode.parentNode.classList.toggle('finalized')
+    let task = obj.parentNode.parentNode
+    task.classList.toggle('finalized')
+    for (el of arr_tarefas){
+        if (el.id == task.id){
+            if (task.classList.contains('finalized')){
+                el.finalized = true
+                break
+            } else{
+                el.finalized = false
+                break
+            }
+        }
+    }
+    localStorage.setItem('tarefas', JSON.stringify(arr_tarefas))
 }
 
 
@@ -174,13 +232,21 @@ function editarTask(obj){
 
 function realizarEdicao(){
     novo_valor = qs('#edit-task-input').value
+    let alterar_task_localst;
     if (novo_valor){
         let tasks = results_container.children
         for (task of tasks){
             if (!task.classList.contains('hide')){
                 task.children[0].innerHTML = novo_valor
+                alterar_task_localst = task
             }
         }
+        for (el of arr_tarefas){
+            if (el.id == alterar_task_localst.id){
+                el.tarefa = novo_valor
+            }
+        }
+        localStorage.setItem('tarefas', JSON.stringify(arr_tarefas))
         qs('#edit-task-input').value = ''
         finishEdit()
     }
@@ -212,11 +278,14 @@ function finishEdit(){
 // EXCLUIR TAREFA
 
 function excluirTask(obj){
-    obj.parentNode.parentNode.remove(true)
+    let task = obj.parentNode.parentNode
+    let valor = task.children[0].innerHTML
+    task.remove(true)
     total_tasks -= 1
     if (total_tasks === 0){
         btn_clean_all_container.classList.add('hide')
     }
+    excluirTarefaLocalStorage(task)
 }
 
 qs('#btn-clean-all').addEventListener('click', ()=>{
@@ -231,4 +300,16 @@ qs('#btn-clean-all').addEventListener('click', ()=>{
     total_tasks = 0
     qs('#find-input').value = ''
     qs('#task-input').value = ''
+    arr_tarefas = []
+    localStorage.setItem('tarefas', arr_tarefas)
 })
+
+
+function excluirTarefaLocalStorage(task){
+    for (el of arr_tarefas){
+        if (el.id == task.id){
+            arr_tarefas.splice(arr_tarefas.indexOf(el), 1)
+        }
+    }
+    localStorage.setItem('tarefas', JSON.stringify(arr_tarefas))
+}

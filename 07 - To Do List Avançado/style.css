@@ -39,6 +39,12 @@ button:hover{
     box-shadow: 0px 0px 0px 1px var(--cor-azul);
 }
 
+button:active{
+    background-color: #FDFDFD;
+    color: var(--cor-azul);
+    box-shadow: none;
+}
+
 
  /* SECTION TITLE  */
 
@@ -75,6 +81,10 @@ button:hover{
 
 .add-task-container button:hover{
     color: white;
+}
+
+.add-task-container button:active{
+    color: var(--cor-azul);
 }
 
 
@@ -168,6 +178,10 @@ button:hover{
     color: white;
 }
 
+.find-container button:active .backspace{
+    color: var(--cor-azul);
+}
+
 .filter-container{
     border-left: 1px solid lightgray;
     flex: 1;
@@ -212,6 +226,10 @@ button:hover{
 
 .icons-area button:hover .material-icons{
     color: white;
+}
+
+.icons-area button:active .material-icons{
+    color: var(--cor-azul);
 }
 
 .finalized{
