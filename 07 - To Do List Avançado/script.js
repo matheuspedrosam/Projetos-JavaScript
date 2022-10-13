@@ -25,6 +25,9 @@ function verificarLocalStorage(){
             }
             id = tarefas_json[tarefas_json.length - 1].id + 1
             arr_tarefas = tarefas_json
+        } else {
+            id = 0
+            arr_tarefas = []
         }
     } else {
         id = 0
@@ -40,11 +43,11 @@ function adicionarTarefa(valor, classe, ide){
         task_result.classList.remove('hide2')
         if (classe === false){
             task_result.classList.remove('finalized')
-        } else{
+        } else {
             task_result.classList.add('finalized')
         }
         var paragraph = task_result.children[0]
-        paragraph.innerHTML = `${valor}`
+        paragraph.innerHTML = valor
         task_result.setAttribute('id', ide)
         results_container.appendChild(task_result)
         btn_clean_all_container.classList.remove('hide')
@@ -278,11 +281,13 @@ function finishEdit(){
 
 function excluirTask(obj){
     let task = obj.parentNode.parentNode
-    let valor = task.children[0].innerHTML
     task.remove(true)
     total_tasks -= 1
     if (total_tasks === 0){
         btn_clean_all_container.classList.add('hide')
+        id = 0
+        arr_tarefas = []
+        localStorage.setItem('tarefas', JSON.stringify(arr_tarefas))
     }
     excluirTarefaLocalStorage(task)
 }
@@ -296,6 +301,7 @@ qs('#btn-clean-all').addEventListener('click', ()=>{
     }
     btn_clean_all_container.classList.add('hide')
     total_tasks = 0
+    id = 0
     qs('#find-input').value = ''
     qs('#task-input').value = ''
     arr_tarefas = []
@@ -309,5 +315,6 @@ function excluirTarefaLocalStorage(task){
             arr_tarefas.splice(arr_tarefas.indexOf(el), 1)
         }
     }
+    console.log(arr_tarefas)
     localStorage.setItem('tarefas', JSON.stringify(arr_tarefas))
 }
