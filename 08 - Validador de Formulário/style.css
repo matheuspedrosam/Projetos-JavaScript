@@ -76,6 +76,14 @@ form button{
     cursor: pointer;
 }
 
+form button:hover{
+    box-shadow: 0px 0px 4px #fc00ff;
+}
+
+form button:focus{
+    outline: none;
+}
+
 .inputs-containers .sucess{
     border: 2px solid #2ecc71;
 }
@@ -107,8 +115,8 @@ form button{
 }
 
 .modal{
-    height: 400px;
-    width: 400px;
+    height: 300px;
+    width: 300px;
     background-color: white;
     position: absolute;
     left: 50%;

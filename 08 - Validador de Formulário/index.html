@@ -22,10 +22,10 @@
         <div class="title-container">
             <h2>Crie Uma Conta</h2>
         </div>
-        <form>
+        <form autocomplete="on">
             <div class="inputs-containers nome-container">
                 <label for="nome">Nome de usuário</label> <br>
-                <input placeholder="Digite seu nome de usuário..." type="text" name="nome" id="nome">
+                <input required autocomplete="name" placeholder="Digite seu nome de usuário..." type="text" name="nome" id="nome">
                 <i id="icon-nome" class="material-symbols-outlined hide">
                     check_circle
                 </i>
@@ -33,7 +33,7 @@
             </div>
             <div class="inputs-containers email-container">
                 <label for="email">Email</label> <br>
-                <input placeholder="Digite seu nome de usuário..." type="email" name="nome" id="email">
+                <input required autocomplete="email" placeholder="Digite seu email..." type="email" name="nome" id="email">
                 <i id="icon-email" class="material-symbols-outlined hide">
                     check_circle
                 </i>
@@ -41,7 +41,7 @@
             </div>
             <div class="inputs-containers senha-container">
                 <label for="senha">Senha</label> <br>
-                <input placeholder="Digite seu nome de usuário..." type="password" name="nome" id="senha">
+                <input required autocomplete="new-password" placeholder="Digite sua senha..." type="password" name="nome" id="senha">
                 <i id="icon-senha" class="material-symbols-outlined hide">
                     check_circle
                 </i>
@@ -49,7 +49,7 @@
             </div>
             <div class="inputs-containers confirmar-senha-container">
                 <label for="confirmar-senha">Confirmação de senha</label> <br>
-                <input placeholder="Digite seu nome de usuário..." type="password" name="nome" id="confirmar-senha">
+                <input required autocomplete="off" placeholder="Confirme sua senha..." type="password" name="nome" id="confirmar-senha">
                 <i id="icon-confirmar-senha" class="material-symbols-outlined hide">
                     check_circle
                 </i>

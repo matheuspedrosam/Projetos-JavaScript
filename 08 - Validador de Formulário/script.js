@@ -4,15 +4,11 @@ const esconderElemento = el => el.classList.add('hide')
 const mostrarElemento = el => el.classList.remove('hide')
 const modal_container = qs('.modal-container')
 
-const msgNome = qs('#msg-nome')
-const msgEmail = qs('#msg-email')
-const msgSenha = qs('#msg-senha')
-const msgConfirmarSenha = qs('#msg-confirmar-senha')
-
-const iconNome = qs('#icon-nome')
-const iconEmail = qs('#icon-email')
-const iconSenha = qs('#icon-senha')
-const iconConfirmarSenha = qs('#icon-confirmar-senha')
+const inputNameContainer = qs('.nome-container')
+const inputEmailContainer = qs('.email-container')
+const inputSenhaContainer = qs('.senha-container')
+const inputConfirmarSenhaContainer = qs('.confirmar-senha-container')
+const arrInputsContainers = [inputNameContainer, inputEmailContainer, inputSenhaContainer, inputConfirmarSenhaContainer]
 
 let nomeValido = false
 let emailValido = false
@@ -21,13 +17,14 @@ let confirmarSenhaValido = false
 
 function EnviarForm(e){
     e.preventDefault()
+    qs('#btn-enviar').style.boxShadow = 'none'
     validarInputs()
     if (nomeValido && emailValido && senhaValido && confirmarSenhaValido){
         mostrarElemento(modal_container)
     }
 }
 
-modal_container.addEventListener('click', ()=>{
+modal_container.addEventListener('click', () => {
     esconderElemento(modal_container)
 })
 
@@ -39,101 +36,81 @@ function validarInputs(){
     let InputConfirmarSenha = qs('#confirmar-senha')
 
     if (InputName.value === ''){
-        msgNome.innerHTML = 'Por favor insira um nome'
-        mostrarElemento(msgNome)
-        iconNome.innerHTML = 'info'
-        iconNome.style.color = '#e74c3c'
-        mostrarElemento(iconNome)
-        InputName.classList.add('fail')
-        nomeValido = false
+        setFailFor(0, 'Por favor insira um nome')
     } else{
-        esconderElemento(msgNome)
-        InputName.classList.remove('fail')
-        InputName.classList.add('sucess')
-        iconNome.innerHTML = 'check_circle'
-        iconNome.style.color = '#2ecc71'
-        mostrarElemento(iconNome)
-        nomeValido = true
+        setSucessFor(0)
     }
 
     if (InputEmail.value === ''){
-        msgEmail.innerHTML = 'Por favor insira um email'
-        mostrarElemento(msgEmail)
-        iconEmail.style.color = '#e74c3c'
-        iconEmail.innerHTML = 'info'
-        mostrarElemento(iconEmail)
-        InputEmail.classList.add('fail')
-        emailValido = false
+        setFailFor(1, 'Por favor insira um email')
     } else if(!ValidateEmail(InputEmail.value)) {
-        msgEmail.innerHTML = 'Por favor insira um email válido!'
-        mostrarElemento(msgEmail)
-        iconEmail.innerHTML = 'info'
-        iconEmail.style.color = '#e74c3c'
-        mostrarElemento(iconEmail)
-        InputEmail.classList.add('fail')
-        emailValido = false
+        setFailFor(1, 'Por favor insira um email válido!')
     } else{
-        esconderElemento(msgEmail)
-        InputEmail.classList.remove('fail')
-        InputEmail.classList.add('sucess')
-        iconEmail.innerHTML = 'check_circle'
-        iconEmail.style.color = '#2ecc71'
-        mostrarElemento(iconEmail)
-        emailValido = true
+        setSucessFor(1)
     }
 
     if (InputSenha.value === ''){
-        msgSenha.innerHTML = 'Por favor insira uma senha'
-        mostrarElemento(msgSenha)
-        iconSenha.innerHTML = 'info'
-        iconSenha.style.color = '#e74c3c'
-        mostrarElemento(iconSenha)
-        InputSenha.classList.remove('sucess')
-        InputSenha.classList.add('fail')
-        senhaValido = false
+        setFailFor(2, 'Por favor insira uma senha')
     } else if(InputSenha.value.length < 7){
-        msgSenha.innerHTML = 'A senha tem que ter no mínimo 7 caracteres'
-        mostrarElemento(msgSenha)
-        iconSenha.innerHTML = 'info'
-        iconSenha.style.color = '#e74c3c'
-        mostrarElemento(iconSenha)
-        InputSenha.classList.remove('sucess')
-        InputSenha.classList.add('fail')
-        senhaValido = false
+        setFailFor(2, 'A senha tem que ter no mínimo 7 caracteres')
     } else{
-        esconderElemento(msgSenha)
-        InputSenha.classList.remove('fail')
-        InputSenha.classList.add('sucess')
-        iconSenha.innerHTML = 'check_circle'
-        iconSenha.style.color = '#2ecc71'
-        mostrarElemento(iconSenha)
-        senhaValido = true
+        setSucessFor(2)
     }
 
     if (InputConfirmarSenha.value === ''){
-        msgConfirmarSenha.innerHTML = 'Por favor insira a confirmação de senha'
-        mostrarElemento(msgConfirmarSenha)
-        iconConfirmarSenha.innerHTML = 'info'
-        iconConfirmarSenha.style.color = '#e74c3c'
-        mostrarElemento(iconConfirmarSenha)
-        InputConfirmarSenha.classList.add('fail')
-        confirmarSenhaValido = false
+        setFailFor(3, 'Por favor insira a confirmação de senha')
     } else if(InputConfirmarSenha.value != InputSenha.value){
-        msgConfirmarSenha.innerHTML = 'As senhas não conferem'
-        mostrarElemento(msgConfirmarSenha)
-        iconConfirmarSenha.innerHTML = 'info'
-        iconConfirmarSenha.style.color = '#e74c3c'
-        mostrarElemento(iconConfirmarSenha)
-        InputConfirmarSenha.classList.add('fail')
-        confirmarSenhaValido = false
+        setFailFor(3, 'As senhas não conferem')
     } else{
-        esconderElemento(msgConfirmarSenha)
-        InputConfirmarSenha.classList.remove('fail')
-        InputConfirmarSenha.classList.add('sucess')
-        iconConfirmarSenha.innerHTML = 'check_circle'
-        iconConfirmarSenha.style.color = '#2ecc71'
-        mostrarElemento(iconConfirmarSenha)
+        setSucessFor(3)
+    }
+}
+
+
+function setSucessFor(opcao){
+    esconderElemento(arrInputsContainers[opcao].children[4])
+    arrInputsContainers[opcao].children[2].classList.remove('fail')
+    arrInputsContainers[opcao].children[2].classList.add('sucess')
+    arrInputsContainers[opcao].children[3].innerHTML = 'check_circle'
+    arrInputsContainers[opcao].children[3].style.color = '#2ecc71'
+    mostrarElemento(arrInputsContainers[opcao].children[3])
+    switch (opcao){
+    case 0:
+        nomeValido = true
+        break
+    case 1:
+        emailValido = true
+        break
+    case 2:
+        senhaValido = true
+        break
+    case 3:
         confirmarSenhaValido = true
+        break
+    }
+}
+
+function setFailFor(opcao, msg){
+    arrInputsContainers[opcao].children[4].innerHTML = msg
+    mostrarElemento(arrInputsContainers[opcao].children[4])
+    arrInputsContainers[opcao].children[2].classList.remove('sucess')
+    arrInputsContainers[opcao].children[2].classList.add('fail')
+    arrInputsContainers[opcao].children[3].innerHTML = 'info'
+    arrInputsContainers[opcao].children[3].style.color = '#e74c3c'
+    mostrarElemento(arrInputsContainers[opcao].children[3])
+    switch (opcao){
+    case 0:
+        nomeValido = false
+        break
+    case 1:
+        emailValido = false
+        break
+    case 2:
+        senhaValido = false
+        break
+    case 3:
+        confirmarSenhaValido = false
+        break
     }
 }
 
