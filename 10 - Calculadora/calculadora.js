@@ -21,8 +21,7 @@ let resultValue = 0
 
 for (botoes of btns){
     botoes.addEventListener('click', (e) => {
-        audio.currentTime = 0.06
-        audio.play()
+        tirarAudioCelular()
         let atr = e.target.innerHTML
         if (isFirstValue === false){
             getFirstValue(atr)
@@ -34,16 +33,17 @@ for (botoes of btns){
 }
 
 function getFirstValue(el){
-    if (Number(el)){
+    if (Number(el) || el == 0){
         display_result.innerHTML = ''
         firstValue += el
         display_result.innerHTML = firstValue
         firstValue = +firstValue
+        cl(firstValue)
     }
 }
 
 function getSecondValue(el){
-    if (Number(el)){
+    if (Number(el) || el == 0){
         if (firstValue != '' && sign != ''){
             secondValue += el
             display_result.innerHTML = secondValue
@@ -130,3 +130,12 @@ clear.addEventListener('click', () => {
     sign = ''
     resultValue = 0
 })
+
+
+
+function tirarAudioCelular(){
+    if (window.innerWidth > 500){
+        audio.currentTime = 0.2
+        audio.play()
+    }
+}
