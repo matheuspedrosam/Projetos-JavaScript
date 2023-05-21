@@ -1,0 +1,76 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(0, 0, 0);
+    background-image: linear-gradient(-45deg, #C9D6FF, #E2E2E2);
+}
+
+main{
+    text-align: center;
+    max-width: 600px;
+    margin: auto;
+}
+
+h1{
+    color: rgba(0, 0, 0, 0.568);
+    margin-left: 14px;
+    background-color: rgba(240, 248, 255, 0.39);
+    border-radius: 20px;
+}
+
+p{
+    font-size: 14px;
+}
+
+a{
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+.flex-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 10px;
+}
+
+.flex-container .itens{
+    cursor: pointer;
+    width: 100%;
+    border-radius: 0px 10px 10px 0px;
+    box-shadow: 0px 0px 8px #0000005e;
+    background-color: aliceblue;
+    color: rgba(0, 0, 0, 0.568);
+    gap: 20px 0px;
+    font-size: 1.25em;
+    border-left: 8px solid #C9D6FF;
+    display: flex;
+    align-items: center;
+}
+
+.flex-container .itens img{
+    display: block;
+    width: 200px;
+}
+
+.flex-container .itens h3{
+    width: 100%;
+}
+
+.flex-container .itens:hover{
+    transform: translate(0px, -4px);
+    transition: transform 0.3s;
+    border-left: 8px solid aquamarine;
+}
+
+@media screen and (max-width: 500px){
+    .flex-container .itens img{
+        display: block;
+        width: 140px;
+    }
+
+    .flex-container .itens h3{
+        font-size: 15px;
+    }
+}

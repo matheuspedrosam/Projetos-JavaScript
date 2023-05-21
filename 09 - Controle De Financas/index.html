@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="shortcut icon" href="../imagens/Icons/Moeda1.png" type="image/x-icon">
+    <title>Controle de Finanças</title>
+</head>
+<body>
+    <main>
+        <header>
+            <div class="controle" id="entrada">
+                <h2>Entrada: R$</h2>
+                <span>000.00</span>
+            </div>
+            <div class="controle" id="saida">
+                <h2>Saída: R$</h2>
+                <span>000.00</span>
+            </div>
+            <div class="controle" id="total">
+                <h2>Total: R$</h2>
+                <span>000.00</span>
+            </div>
+        </header>
+        <form>
+            <div id="desc-container">
+                <label for="desc">Descrição</label> <br>
+                <input type="text" id="desc">
+            </div>
+            <div id="valor-container">
+                <label for="valor">Valor</label> <br>
+                <input type="text" id="valor">
+            </div>
+            <div id="tipo-container">
+                <label for="tipo">Tipo</label> <br>
+                <select name="tipo" id="tipo">
+                    <option value="saida" selected>Saída</option>
+                    <option value="entrada">Entrada</option>
+                </select>
+            </div>
+            <button id="form-btn" onclick="incluir(event)">Incluir</button>
+        </form>
+        <div id="table-container">
+            <table id="tabela">
+                <tr>
+                    <th id="table-desc" scope="col">Descrição</th>
+                    <th id="table-valor" scope="col">Valor</th>
+                    <th id="table-tipo" scope="col">Tipo</th>
+                    <th scope="col"></th>
+                </tr>
+            </table>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
